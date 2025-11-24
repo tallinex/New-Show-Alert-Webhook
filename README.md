@@ -1,29 +1,29 @@
-For Synology NAS:
-Download the new_season_alert.py file and store in a convenient location e.g. /scripts/new_season_alerts/new_season_alert.py
+For Synology NAS:<br>
+Download the new_season_alert.py file and store in a convenient location e.g. /scripts/new_season_alerts/new_season_alert.py<br>
 
-Set up your webhook
-For discord:
-on your server, click the cog icon (edit channel) next to the channel you want the alert to be shown on.
-click on Integrations on the left menu and then webhooks on the right pane
-press New Webhook
-give it a name (eg Coming Soon) and an avatar if desired
-press save and then press Copy Webhook URL
+Set up your webhook<br>
+For discord:<br>
+on your server, click the cog icon (edit channel) next to the channel you want the alert to be shown on.<br>
+click on Integrations on the left menu and then webhooks on the right pane<br>
+press New Webhook<br>
+give it a name (eg Coming Soon) and an avatar if desired<br>
+press save and then press Copy Webhook URL<br>
 
-Configure the script:
-open the new_season_alert.py file and set the variables at the top
-SONARR_URL = "http://your-nas-ip:8989"  # Your Sonarr URL
-SONARR_API_KEY = "your_api_key_here"  # Get from Sonarr Settings > General
-WEBHOOK_URL = "webhook url copied from previous section"  # Discord, Slack, or custom webhook
-DAYS_AHEAD = 30  # Check for shows returning in next X days
-REQUEST_TIMEOUT = 30  # Timeout in seconds for API requests
+Configure the script:<br>
+open the new_season_alert.py file and set the variables at the top<br>
+SONARR_URL = "http://your-nas-ip:8989"  # Your Sonarr URL<br>
+SONARR_API_KEY = "your_api_key_here"  # Get from Sonarr Settings > General<br>
+WEBHOOK_URL = "webhook url copied from previous section"  # Discord, Slack, or custom webhook<br>
+DAYS_AHEAD = 30  # Check for shows returning in next X days<br>
+REQUEST_TIMEOUT = 30  # Timeout in seconds for API requests<br>
 
 
-set up a scheduled task:
-1: Control Panel --> Task Scheduler
-2: Create -->Scheduled Task --> User Defined Script
-3: General tab; Task Name - e.g. New Season Alert; User - root
-4: Schedule; Repeate - Daily; Start Time - eg 17 : 00 (for 5pm)
-5: Task Settings; user-defiend script - python3 /volume1/scripts/new_season_alerts/new_season_alert.py
-6: Press ok to save
+set up a scheduled task:<br>
+1: Control Panel --> Task Scheduler<br>
+2: Create -->Scheduled Task --> User Defined Script<br>
+3: General tab; Task Name - e.g. New Season Alert; User - root<br>
+4: Schedule; Repeate - Daily; Start Time - eg 17 : 00 (for 5pm)<br>
+5: Task Settings; user-defiend script - python3 /volume1/scripts/new_season_alerts/new_season_alert.py<br>
+6: Press ok to save<br>
 
-The task will run every day at the set time and 
+The task will run every day at the set time and push an alert to your discord webhook
