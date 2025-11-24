@@ -8,6 +8,7 @@ click on Integrations on the left menu and then webhooks on the right pane<br>
 press New Webhook<br>
 give it a name (eg Coming Soon) and an avatar if desired<br>
 press save and then press Copy Webhook URL<br>
+<img width="1044" height="558" alt="image" src="https://github.com/user-attachments/assets/ae031376-90b6-4a81-865f-cf3a16eee5a0" />
 
 <b>Configure the script:</b><br>
 open the new_season_alert.py file and set the variables at the top<br>
@@ -27,3 +28,4 @@ REQUEST_TIMEOUT = 30  # Timeout in seconds for API requests<br>
 6: Press ok to save<br>
 
 The task will run every day at the set time and push an alert to your discord webhook
+<img width="586" height="291" alt="image" src="https://github.com/user-attachments/assets/c5bb14a9-35a3-4094-9d42-51ece144b7ff" />
