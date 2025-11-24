@@ -1,4 +1,8 @@
-<b>For Synology NAS:</b><br>
+<img width="586" height="291" alt="image" src="https://github.com/user-attachments/assets/c5bb14a9-35a3-4094-9d42-51ece144b7ff" />
+<h1>Send a one time alert to your discord server channel when a new season of a show you are monitoring in Sonarr has a new season coming soon.</h1>
+
+
+<h2>For Synology NAS:</h2><br>
 Download the new_season_alert.py file and store in a convenient location e.g. /scripts/new_season_alerts/new_season_alert.py<br>
 
 <b>Set up your webhook</b><br>
