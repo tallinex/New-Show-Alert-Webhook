@@ -6,7 +6,7 @@
 <h2>For Synology NAS:</h2>
 Download the new_season_alert.py file and store in a convenient location e.g. /scripts/new_season_alerts/new_season_alert.py<br>
 
-<b>Set up your webhook</b><br>
+<h2>Set up your webhook</h2><br>
 <b>For discord:</b><br>
 on your server, click the cog icon (edit channel) next to the channel you want the alert to be shown on.<br>
 click on Integrations on the left menu and then webhooks on the right pane<br>
@@ -15,7 +15,7 @@ give it a name (eg Coming Soon) and an avatar if desired<br>
 press save and then press Copy Webhook URL<br>
 <img width="1044" height="558" alt="image" src="https://github.com/user-attachments/assets/ae031376-90b6-4a81-865f-cf3a16eee5a0" />
 
-<b>Configure the script:</b><br>
+<h2>Configure the script:</h2><br>
 open the new_season_alert.py file and set the variables at the top<br>
 SONARR_URL = "http://your-nas-ip:8989"  # Your Sonarr URL<br>
 SONARR_API_KEY = "your_api_key_here"  # Get from Sonarr Settings > General<br>
@@ -24,7 +24,7 @@ DAYS_AHEAD = 30  # Check for shows returning in next X days<br>
 REQUEST_TIMEOUT = 30  # Timeout in seconds for API requests<br>
 
 
-<b>set up a scheduled task:</b><br>
+<h2>set up a scheduled task:</h2><br>
 1: Control Panel --> Task Scheduler<br>
 2: Create -->Scheduled Task --> User Defined Script<br>
 3: General tab; Task Name - e.g. New Season Alert; User - root<br>
