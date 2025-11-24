@@ -11,8 +11,8 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Set
 
 # Configuration - UPDATE THESE VALUES
-SONARR_URL = "http://192.168.4.4:8989"  # Your Sonarr URL
-SONARR_API_KEY = "a5b52db75cf54c2d879e59210674f6ef"  # Get from Sonarr Settings > General
+SONARR_URL = "http://your-nas-ip:8989"  # Your Sonarr URL
+SONARR_API_KEY = "your_api_key_here"  # Get from Sonarr Settings > General
 WEBHOOK_URL = "https://discord.com/api/webhooks/1441679885268549652/e4jd7aq7MnW7YbyfOGofp29GgK1roNvDCit2ToDD2jNKnsag_JE5xuGUmLneJ9qRHkLj"  # Discord, Slack, or custom webhook
 DAYS_AHEAD = 30  # Check for shows returning in next X days
 REQUEST_TIMEOUT = 30  # Timeout in seconds for API requests
