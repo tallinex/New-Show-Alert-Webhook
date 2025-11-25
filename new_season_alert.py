@@ -13,7 +13,7 @@ from typing import List, Dict, Set
 # Configuration - UPDATE THESE VALUES
 SONARR_URL = "http://your-nas-ip:8989"  # Your Sonarr URL
 SONARR_API_KEY = "your_api_key_here"  # Get from Sonarr Settings > General
-WEBHOOK_URL = "https://discord.com/api/webhooks/1441679885268549652/e4jd7aq7MnW7YbyfOGofp29GgK1roNvDCit2ToDD2jNKnsag_JE5xuGUmLneJ9qRHkLj"  # Discord, Slack, or custom webhook
+WEBHOOK_URL = "your_webhook_url_here"  # Discord, Slack, or custom webhook
 DAYS_AHEAD = 30  # Check for shows returning in next X days
 REQUEST_TIMEOUT = 30  # Timeout in seconds for API requests
 
