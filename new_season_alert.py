@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
+v14
 Sonarr Upcoming Shows Alert Script
 Checks for monitored shows returning within 30 days and sends webhook notifications
+Sends individual alerts per show, once per season
 """
 
 import requests
@@ -19,7 +21,7 @@ REQUEST_TIMEOUT = 30  # Timeout in seconds for API requests
 
 # Alert tracking file - stores which shows have been alerted
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-ALERT_LOG_FILE = os.path.join(SCRIPT_DIR, "sonarr_alerts_sent.txt")
+ALERT_LOG_FILE = os.path.join(SCRIPT_DIR, "alerts_sent.txt")
 
 def load_alerted_shows() -> Set[str]:
     """Load the set of shows that have already been alerted"""
@@ -132,7 +134,7 @@ def check_upcoming_shows(series_list: List[Dict], alerted_shows: Set[str]) -> Li
                         'network': series.get('network', 'Unknown'),
                         'status': series.get('status', 'Unknown'),
                         'show_key': show_key,
-                        'tmdbId': series.get('tmdbId','Unknown')
+                        'tmdbId': series.get('tmdbId', 'Unknown')
                     })
         except (ValueError, TypeError) as e:
             print(f"Error parsing date for {series.get('title')}: {e}")
@@ -145,16 +147,27 @@ def check_upcoming_shows(series_list: List[Dict], alerted_shows: Set[str]) -> Li
 def send_webhook_alert(show: Dict):
     """Send individual alert to webhook for a single show"""
     
-    # Create message for single show
-    days_text = "TODAY!" if show['days_until'] == 0 else f"in {show['days_until']} days"
+    # Determine if it's a new show (Season 1) or returning show
+    season_num = show['season']
+    is_new_show = (season_num == 1)
     
-    message = (
-        f"**{show['title']}**\n"
-        f"Season {show['season']} Starts on {show['next_airing']} \n"
-        f"https://www.themoviedb.org/tv/{show['tmdbId']}/season/{show['season']}"
-    )
+    # Create message based on show type
+    if is_new_show:
+        # New show - Season 1
+        message = (
+            f"**{show['title']}**\n"
+            f"New Show starts on {show['next_airing']} \n"
+            f"https://www.themoviedb.org/tv/{show['tmdbId']}/season/{season_num}"
+        )
+    else:
+        # Returning show - Season 2+
+        message = (
+            f"**{show['title']}**\n"
+            f"Season {season_num} starts on {show['next_airing']} \n"
+            f"https://www.themoviedb.org/tv/{show['tmdbId']}/season/{season_num}"
+        )
     
-    # Webhook payload (works with Discord, adapt for other services)
+    # Webhook payload (works with Discord)
     payload = {
         "content": message,
         "username": "Coming Soon"
@@ -168,7 +181,8 @@ def send_webhook_alert(show: Dict):
     try:
         response = requests.post(WEBHOOK_URL, json=payload, timeout=REQUEST_TIMEOUT)
         response.raise_for_status()
-        print(f"Alert sent for: {show['title']} Season {show['season']}")
+        show_type = "New show" if is_new_show else f"Season {season_num}"
+        print(f"Alert sent for: {show['title']} ({show_type})")
         return True
     except requests.exceptions.RequestException as e:
         print(f"Error sending webhook for {show['title']}: {e}")
@@ -198,7 +212,8 @@ def main():
         
         # Send individual alert for each show
         for show in upcoming_shows:
-            print(f"  - {show['title']} Season {show['season']} in {show['days_until']} days")
+            season_type = "New show" if show['season'] == 1 else f"Season {show['season']}"
+            print(f"  - {show['title']} ({season_type}) in {show['days_until']} days")
             
             # Send webhook alert
             if send_webhook_alert(show):
